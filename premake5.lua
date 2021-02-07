@@ -1,5 +1,5 @@
-gitVersioningCommand = "git describe --tags --dirty --always"
-gitCurrentBranchCommand = "git symbolic-ref -q --short HEAD"
+gitVersioningCommand = "git describe --tags --always"
+gitCurrentBranchCommand = "git symbolic-ref -q "
 
 -- Quote the given string input as a C string
 function cstrquote(value)
