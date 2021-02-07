@@ -116,9 +116,7 @@ namespace Components
 		Utils::IO::CreateDir("minidumps");
 		PathCombineA(filename, "minidumps\\", Utils::String::VA("%s-" VERSION "-%s.dmp", exeFileName, filenameFriendlyTime));
 
-#ifndef DISABLE_ANTICHEAT
-		AntiCheat::UninstallLibHook();
-#endif
+
 
 		DWORD fileShare = FILE_SHARE_READ | FILE_SHARE_WRITE;
 		HANDLE hFile = CreateFileA(filename, GENERIC_WRITE | GENERIC_READ, fileShare, nullptr, (fileShare & FILE_SHARE_WRITE) > 0 ? OPEN_ALWAYS : OPEN_EXISTING, NULL, nullptr);
@@ -136,9 +134,7 @@ namespace Components
 			TerminateProcess(GetCurrentProcess(), ExceptionInfo->ExceptionRecord->ExceptionCode);
 		}
 
-#ifndef DISABLE_ANTICHEAT
-		AntiCheat::InstallLibHook();
-#endif
+
 
 		return EXCEPTION_CONTINUE_SEARCH;
 	}

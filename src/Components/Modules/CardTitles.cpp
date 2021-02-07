@@ -191,24 +191,24 @@ namespace Components
 	CardTitles::CardTitles()
 	{
 		Dvar::OnInit([]()
-		{
-			CardTitles::CustomTitleDvar = Dvar::Register<const char*>("customtitle", "", Game::dvar_flag::DVAR_FLAG_USERINFO | Game::dvar_flag::DVAR_FLAG_SAVED, "Custom card title");
-		});
+			{
+				CardTitles::CustomTitleDvar = Dvar::Register<const char*>("customtitle", "", Game::dvar_flag::DVAR_FLAG_USERINFO | Game::dvar_flag::DVAR_FLAG_SAVED, "Custom card title");
+			});
 
 		ServerCommands::OnCommand(21, [](Command::Params* params)
-		{
-			if (params->get(1) == "customTitles"s && !Dedicated::IsEnabled())
 			{
-				if (params->length() == 3)
+				if (params->get(1) == "customTitles"s && !Dedicated::IsEnabled())
 				{
-					CardTitles::ParseCustomTitles(params->get(2));
-					return true;
+					if (params->length() == 3)
+					{
+						CardTitles::ParseCustomTitles(params->get(2));
+						return true;
+					}
 				}
-			}
 
-			return false;
+				return false;
 
-		});
+			});
 
 		for (int i = 0; i < ARRAYSIZE(CardTitles::CustomTitles); ++i)
 		{
@@ -220,12 +220,6 @@ namespace Components
 		// Table lookup stuff
 		Utils::Hook(0x62DCC1, CardTitles::TableLookupByRowHookStub).install()->quick();
 		Utils::Hook::Nop(0x62DCC6, 1);
-
-        // This is placed here in case the anticheat has been disabled!
-        // This checks specifically for launching the process suspended to inject a dll
-#if !defined(DISABLE_ANTICHEAT)
-        AntiCheat::CheckStartupTime();
-#endif
 	}
 
 	CardTitles::~CardTitles()
