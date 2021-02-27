@@ -177,7 +177,7 @@ namespace Components
 
 		std::string username = "Unknown Soldier";
 
-		if (Steam::Proxy::SteamFriends)
+		/*if (Steam::Proxy::SteamFriends)
 		{
 			const char* steamName = Steam::Proxy::SteamFriends->GetPersonaName();
 
@@ -185,7 +185,7 @@ namespace Components
 			{
 				username = steamName;
 			}
-		}
+		}*/
 
 		return Dvar::Register<const char*>(name, username.data(), Dvar::Flag(flag | Game::dvar_flag::DVAR_FLAG_SAVED).val, description).get<Game::dvar_t*>();
 	}

@@ -311,8 +311,8 @@ namespace Components
 
 		if (Dedicated::IsEnabled() || ZoneBuilder::IsEnabled())
 		{
-			// Make sure all callbacks are handled
-			Scheduler::OnFrame(Steam::SteamAPI_RunCallbacks);
+			//// Make sure all callbacks are handled
+			//Scheduler::OnFrame(Steam::SteamAPI_RunCallbacks);
 
 			Dvar::Register<bool>("sv_lanOnly", false, Game::dvar_flag::DVAR_FLAG_NONE, "Don't act as node");
 
@@ -516,22 +516,22 @@ namespace Components
 				Dedicated::PlayerGuids[i][1].bits = 0;
 			}
 
-			// Intercept server commands
-			ServerCommands::OnCommand(20, [](Command::Params* params)
-			{
-				for (int client = 0; client < 18; client++)
-				{
-					Dedicated::PlayerGuids[client][0].bits = strtoull(params->get(2 * client + 1), nullptr, 16);
-					Dedicated::PlayerGuids[client][1].bits = strtoull(params->get(2 * client + 2), nullptr, 16);
+			//// Intercept server commands
+			//ServerCommands::OnCommand(20, [](Command::Params* params)
+			//{
+			//	for (int client = 0; client < 18; client++)
+			//	{
+			//		Dedicated::PlayerGuids[client][0].bits = strtoull(params->get(2 * client + 1), nullptr, 16);
+			//		Dedicated::PlayerGuids[client][1].bits = strtoull(params->get(2 * client + 2), nullptr, 16);
 
-					if (Steam::Proxy::SteamFriends && Dedicated::PlayerGuids[client][1].bits != 0)
-					{
-						Steam::Proxy::SteamFriends->SetPlayedWith(Dedicated::PlayerGuids[client][1]);
-					}
-				}
+			//		if (Steam::Proxy::SteamFriends && Dedicated::PlayerGuids[client][1].bits != 0)
+			//		{
+			//			Steam::Proxy::SteamFriends->SetPlayedWith(Dedicated::PlayerGuids[client][1]);
+			//		}
+			//	}
 
-				return true;
-			});
+			//	return true;
+			//});
 		}
 
 		Scheduler::OnFrame([]()

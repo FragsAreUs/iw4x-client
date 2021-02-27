@@ -973,6 +973,8 @@ namespace Components
             }			
 		});
 
+		// Disable cheat protection for dvars
+		Utils::Hook::Set<BYTE>(0x647682, 0xEB);
 
 		// Dvars
 		Dvar::Register<bool>("ui_streamFriendly", false, Game::DVAR_FLAG_SAVED, "Stream friendly UI");

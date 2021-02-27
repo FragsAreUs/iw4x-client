@@ -15,6 +15,7 @@ namespace Components
 		id.accountInstance = 0x40000;
 
 		return id;
+
 	}
 
 	Network::Address Party::Target()

@@ -374,7 +374,7 @@ namespace Steam
 
 	bool Proxy::Inititalize()
 	{
-		/*std::string directoy = Proxy::GetSteamDirectory();
+		std::string directoy = Proxy::GetSteamDirectory();
 		if (directoy.empty()) return false;
 
 		SetDllDirectoryA(Proxy::GetSteamDirectory().data());
@@ -385,7 +385,7 @@ namespace Steam
 
 			Proxy::Overlay = ::Utils::Library(GAMEOVERLAY_LIB, false);
 			if (!Proxy::Overlay.valid()) return false;
-		}*/
+		}
 
 		Proxy::Client = ::Utils::Library(STEAMCLIENT_LIB, false);
 		if (!Proxy::Client.valid()) return false;
